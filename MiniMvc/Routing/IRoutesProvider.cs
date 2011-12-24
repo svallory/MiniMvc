@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Routing;
-
-namespace MiniMvc
+﻿namespace MiniMvc.Routing
 {
-	interface IRoutesProvider
+	using System.Web.Routing;
+	public interface IRoutesProvider
 	{
 		RouteCollection GetRoutes(); 
 	}

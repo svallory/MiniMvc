@@ -23,14 +23,10 @@ Which is actually most of what MVC is all about. The models aren't covered just 
 2. Configure the Razor views on your `Web.config`
 		<configuration>
 			<configSections>
-				<section name="razorEngine" type="RazorEngine.Configuration.RazorEngineConfigurationSection, RazorEngine" requirePermission="false"/>
-				<sectionGroup name="system.web.webPages.razor" type="System.Web.WebPages.Razor.Configuration.RazorWebSectionGroup, System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35">
-					<section name="host" type="System.Web.WebPages.Razor.Configuration.HostSection, System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" />
-					<section name="pages" type="System.Web.WebPages.Razor.Configuration.RazorPagesSection, System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" />
-				</sectionGroup>
+				<section name="miniMvc" type="MiniMvc.Configuration.MiniMvcConfigurationSection, MiniMvc" />
 			</configSections>
-			<system.web.webPages.razor>
-				<pages pageBaseType="System.Web.Mvc.WebViewPage">
+			<miniMvc routesProvider="San.RoutesProvider, App_Code">
+				<viewEngine viewsFolder="~/Views" viewExtension=".vbhtml">
 					<namespaces>
 						<add namespace="System.Web.Mvc" />
 						<add namespace="System.Web.Mvc.Ajax" />
@@ -38,8 +34,8 @@ Which is actually most of what MVC is all about. The models aren't covered just 
 						<add namespace="System.Web.Routing" />
 						<add namespace="San.Model" />
 					</namespaces>
-				</pages>
-			</system.web.webPages.razor>
+				</viewEngine>
+			</miniMvc>
 		</configuration>
 
 2. Instantiate the MiniMvc inside your Global.asax file like this

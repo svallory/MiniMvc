@@ -1,7 +1,0 @@
-F:\MiniMvc\MiniMvc\obj\Debug\ResolveAssemblyReference.cache
-F:\MiniMvc\MiniMvc\bin\Debug\MiniMvc.dll
-F:\MiniMvc\MiniMvc\bin\Debug\MiniMvc.pdb
-F:\MiniMvc\MiniMvc\bin\Debug\RazorEngine.dll
-F:\MiniMvc\MiniMvc\bin\Debug\System.Web.Razor.dll
-F:\MiniMvc\MiniMvc\obj\Debug\MiniMvc.dll
-F:\MiniMvc\MiniMvc\obj\Debug\MiniMvc.pdb

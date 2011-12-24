@@ -3,7 +3,7 @@ using System.Configuration;
 
 namespace MiniMvc.Configuration
 {
-	class DefaultsElement : ConfigurationElementCollection
+	public class DefaultsElement : ConfigurationElementCollection
 	{
 		#region Overrides of ConfigurationElementCollection
 

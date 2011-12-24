@@ -6,34 +6,34 @@ using System.Text;
 namespace MiniMvc
 {
 	[AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
-	sealed class ActionAttribute : Attribute
+	public sealed class ActionAttribute : Attribute
 	{
-		readonly string name;
+		readonly string _name;
 
 		public ActionAttribute (string Name) 
 		{ 
-			this.name = Name;        
+			this._name = Name;        
 		}
 
 		public string Name
 		{
-			get { return name; }
+			get { return _name; }
 		}
 	}
 
 	[AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-	sealed class ControllerAttribute : Attribute
+	public sealed class ControllerAttribute : Attribute
 	{
-		readonly string name;
+		readonly string _name;
     
 	   public ControllerAttribute (string name) 
 	   { 
-			this.name = name;
+			this._name = name;
 	   }
    
 		public string Name
 		{
-			get { return name; }
+			get { return _name; }
 		}
 	}
 }

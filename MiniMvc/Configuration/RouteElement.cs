@@ -2,7 +2,7 @@ using System.Configuration;
 
 namespace MiniMvc.Configuration
 {
-	class RouteElement : ConfigurationElement
+	public class RouteElement : ConfigurationElement
 	{
 		#region Attribute Names
 		private const string NameAttribute = "name";

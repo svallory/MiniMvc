@@ -11,7 +11,7 @@ namespace Exceptions
 	public class ControllerNotFoundException : MiniMVCException
 	{
 		public ControllerNotFoundException(String controller) : 
-			base("The controller '" + controller + "' could not be found. Make sure you added the <ControllerAttribute(\"controller name\")> to the class")
+			base("The controller '" + controller + "' could not be found. Make sure you are extending MiniMvc.Controller and your route is properly set . ")
 		{
 		}
 	}

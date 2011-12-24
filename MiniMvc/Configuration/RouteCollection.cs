@@ -1,26 +1,13 @@
-using System.Configuration;
-
 namespace MiniMvc.Configuration
 {
+	using System.Configuration;
+
 	[ConfigurationCollection(typeof(RouteElement), AddItemName = "route")]
-	class RouteCollection : ConfigurationElementCollection
+	public class RouteCollection : ConfigurationElementCollection
 	{
-		#region Attribute Names
-		private const string RouteProviderAttribute = "routeProvider";
-		private const string RouteAttribute = "route";
-		#endregion
-
-		[ConfigurationProperty(RouteProviderAttribute, IsRequired = false)]
-		[SubclassTypeValidator(typeof(IRoutesProvider))]
-		public string ViewsPath
+		protected RouteElement Item(int i)
 		{
-			get { return (string)this[RouteProviderAttribute]; }
-			set { this[RouteProviderAttribute] = value; }
-		}
-
-		protected override string ElementName
-		{
-			get { return RouteAttribute; }
+			return (RouteElement)this.BaseGet(i);
 		}
 
 		#region Overrides of ConfigurationElementCollection

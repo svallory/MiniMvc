@@ -1,4 +1,8 @@
-﻿namespace MiniMvc.Configuration
+﻿using System;
+using System.ComponentModel;
+using MiniMvc.Routing;
+
+namespace MiniMvc.Configuration
 {
 	using System.Collections.Generic;
 	using System.Linq;
@@ -24,13 +28,16 @@
 	/// <summary>
 	/// Defines the main configuration section for the MiniMvc.
 	/// </summary>
-	class MiniMvcConfigurationSection : ConfigurationSection
+	public class MiniMvcConfigurationSection : ConfigurationSection
 	{
 		private const string SectionPath = "miniMvc";
 
 		#region Attribute names
 		private const string ViewEngineAttribute = "viewEngine";
 		private const string RoutesAttribute = "routes";
+		private const string RoutesProviderAttribute = "routesProvider";
+		private const string DefaultControllerAttribute = "defaultController";
+		private const string DefaultActionAttribute = "defaultAction";
 		#endregion
 		
 		[ConfigurationProperty(ViewEngineAttribute, IsRequired = false)]
@@ -46,15 +53,47 @@
 			set { this[RoutesAttribute] = value; }
 		}
 
+		[TypeConverter(typeof(TypeNameConverter))]
+		[ConfigurationProperty(RoutesProviderAttribute, IsRequired = false, DefaultValue = "MiniMvc.Routing.DefaultRoutesProvider, MiniMvc")]
+		public Type RoutesProviderType
+		{
+			get { return this[RoutesProviderAttribute] as Type; }
+			set { this[RoutesProviderAttribute] = value; }
+		}
+
+		private IRoutesProvider _routesProvider;
+		public IRoutesProvider RoutesProvider
+		{
+			get { return _routesProvider ?? (_routesProvider = Activator.CreateInstance(RoutesProviderType) as IRoutesProvider); }
+			set {
+				_routesProvider = value;
+				RoutesProviderType = value.GetType();
+			}
+		}
+
+		[ConfigurationProperty(DefaultControllerAttribute, IsRequired = false, DefaultValue = "Site")]
+		public string DefaultController
+		{
+			get { return (string)this[DefaultControllerAttribute]; }
+			set { this[DefaultControllerAttribute] = value; }
+		}
+
+		[ConfigurationProperty(DefaultActionAttribute, IsRequired = false, DefaultValue = "Index")]
+		public string DefaultAction
+		{
+			get { return (string)this[DefaultActionAttribute]; }
+			set { this[DefaultActionAttribute] = value; }
+		}
+
 		#region Methods
-        /// <summary>
+		/// <summary>
 		/// Gets an instance of <see cref="MiniMvcConfigurationSection"/> that represents the current configuration.
-        /// </summary>
+		/// </summary>
 		/// <returns>An instance of <see cref="MiniMvcConfigurationSection"/>, or null if no configuration is specified.</returns>
-        public static MiniMvcConfigurationSection GetConfiguration()
-        {
-            return ConfigurationManager.GetSection(SectionPath) as MiniMvcConfigurationSection;
-        }
-        #endregion
+		public static MiniMvcConfigurationSection GetConfiguration()
+		{
+			return ConfigurationManager.GetSection(SectionPath) as MiniMvcConfigurationSection;
+		}
+		#endregion
 	}
 }
